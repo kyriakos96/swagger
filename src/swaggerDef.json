@@ -1,0 +1,583 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Swagger Project Title",
+		"version": "0.0.1"
+	},
+	"servers": [
+		{
+			"url": "http://127.0.0.1:3313",
+			"description": "Swagger API Auto Mocking"
+		}
+	],
+	"paths": {
+		"/api/v1/nationalities": {
+			"get": {
+				"tags": [
+					"Miscellaneous"
+				],
+				"summary": "Get all Distinct Nationalities",
+				"description": "Returns all Distinct Nationalities from db",
+				"operationId": "nationalities",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NationalitiesResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InvalidStatusResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/companies/{companyId}/projects/{projectId}/versions": {
+			"post": {
+				"tags": [
+					"Project Versions"
+				],
+				"summary": "Create a specific version of a project for the specific company.",
+				"description": "Create a specific version of a project for the specific company.",
+				"operationId": "createProjectVersion",
+				"parameters": [
+					{
+						"name": "companyId",
+						"in": "path",
+						"description": "Company Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "projectId",
+						"in": "path",
+						"description": "Project Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateProjectVersionBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateProjectVersionResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Please check the mandatory values to update and try again",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InvalidStatusResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/companies/{companyId}/projects/{projectId}/versions/{version}": {
+			"get": {
+				"tags": [
+					"Project Versions"
+				],
+				"summary": "Get a specific version of a project for the specific company.",
+				"description": "Get a specific version of a project for the specific company.",
+				"operationId": "getProjectVersion",
+				"parameters": [
+					{
+						"name": "companyId",
+						"in": "path",
+						"description": "Company Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "projectId",
+						"in": "path",
+						"description": "Project Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "Version",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProjectVersion"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InvalidStatusResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Project Versions"
+				],
+				"summary": "De-active a specific version.",
+				"description": "De-active a specific version for the specified Project/company.",
+				"operationId": "deleteProjectVersion",
+				"parameters": [
+					{
+						"name": "companyId",
+						"in": "path",
+						"description": "Company Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "projectId",
+						"in": "path",
+						"description": "Project Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "Version",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operator",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteProjectVersion"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InvalidStatusResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"Project Versions"
+				],
+				"summary": "Save/Update a specific version",
+				"description": "Save/Update a specific version of a project for the specified company.",
+				"operationId": "updateProjectVersion",
+				"parameters": [
+					{
+						"name": "companyId",
+						"in": "path",
+						"description": "Company Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "projectId",
+						"in": "path",
+						"description": "Project Id",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "version",
+						"in": "path",
+						"description": "Version",
+						"required": true,
+						"style": "simple",
+						"explode": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateProjectVersionBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "successful operator",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateProjectVersion"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Please check the mandatory values to update and try again",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InvalidStatusResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"NationalitiesResponse": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "object",
+						"required": [
+							"items",
+							"total",
+							"size"
+						],
+						"properties": {
+							"items": {
+								"type": "array",
+								"items": {
+									"$ref": "#/components/schemas/Nationalities"
+								}
+							},
+							"total": {
+								"type": "number",
+								"example": 1
+							},
+							"size": {
+								"type": "number",
+								"example": 5
+							}
+						}
+					},
+					"code": {
+						"type": "number",
+						"example": 200
+					}
+				},
+				"example": {
+					"data": {
+						"items": [
+							{
+								"countryCode": "GBR",
+								"description": "United Kingdom"
+							},
+							{
+								"countryCode": "CYP",
+								"description": "CYPRIOT"
+							},
+							{
+								"countryCode": "GRC",
+								"description": "Greece"
+							},
+							{
+								"countryCode": "IND",
+								"description": "India"
+							},
+							{
+								"countryCode": "FRA",
+								"description": "France"
+							}
+						],
+						"total": 5,
+						"size": 5
+					},
+					"code": 200
+				}
+			},
+			"Nationalities": {
+				"type": "object",
+				"required": [
+					"countryCode",
+					"description"
+				],
+				"properties": {
+					"countryCode": {
+						"type": "string",
+						"example": "CYP"
+					},
+					"description": {
+						"type": "string",
+						"example": "Cyprus"
+					}
+				}
+			},
+			"InvalidStatusResponse": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "string",
+						"example": "Some error message..."
+					},
+					"code": {
+						"type": "number",
+						"example": 400
+					},
+					"errors": {
+						"type": "object",
+						"example": {
+							"application": [
+								"error.path.missing"
+							]
+						}
+					}
+				},
+				"example": {
+					"data": "Some error message...",
+					"code": 400,
+					"errors": {
+						"someFieldWithError": [
+							"error.path.missing"
+						]
+					}
+				}
+			},
+			"CreateProjectVersionBody": {
+				"type": "object",
+				"required": [
+					"version",
+					"date"
+				],
+				"properties": {
+					"version": {
+						"type": "string",
+						"example": "v1.0.12"
+					},
+					"date": {
+						"type": "string",
+						"format": "date",
+						"example": "2022-01-15"
+					}
+				}
+			},
+			"CreateProjectVersionResponse": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "object",
+						"required": [
+							"version",
+							"date"
+						],
+						"properties": {
+							"version": {
+								"type": "string",
+								"example": "v1.0.12"
+							}
+						}
+					},
+					"date": {
+						"type": "string",
+						"format": "date",
+						"example": "2022-01-15"
+					}
+				},
+				"example": {
+					"data": {
+						"version": "v1.0.12",
+						"date": "2022-01-15"
+					},
+					"code": 201
+				}
+			},
+			"ProjectVersion": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "object",
+						"required": [
+							"version"
+						],
+						"properties": {
+							"version": {
+								"type": "string",
+								"example": "v1.0.12"
+							},
+							"date": {
+								"type": "string",
+								"format": "date",
+								"example": "2022-01-15"
+							}
+						}
+					},
+					"code": {
+						"type": "number",
+						"example": 200
+					}
+				},
+				"example": {
+					"data": {
+						"version": "v1.0.12",
+						"date": "2020-01-15"
+					},
+					"code": 200
+				}
+			},
+			"DeleteProjectVersion": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "string",
+						"example": "Successfully deactivated {version} version of {projectId}"
+					},
+					"code": {
+						"type": "number",
+						"example": 200
+					}
+				},
+				"example": {
+					"data": "Successfully deactivated {version} version of {projectId}",
+					"code": 200
+				}
+			},
+			"UpdateProjectVersionBody": {
+				"type": "object",
+				"required": [
+					"version"
+				],
+				"properties": {
+					"version": {
+						"type": "string",
+						"example": "v1.0.13"
+					}
+				}
+			},
+			"UpdateProjectVersion": {
+				"type": "object",
+				"required": [
+					"data",
+					"code"
+				],
+				"properties": {
+					"data": {
+						"type": "string",
+						"example": "Successfully updated {version} version of {projectId}"
+					},
+					"code": {
+						"type": "number",
+						"example": 200
+					}
+				},
+				"example": {
+					"data": "Successfully updated {version} version of {projectId}",
+					"code": 200
+				}
+			}
+		}
+	}
+}
